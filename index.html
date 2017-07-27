@@ -1,20 +1,24 @@
 <!Doctype html>
 <head>
 	<style>
-		body{
+		body {
 			padding: 20px 0 0 20px;
 		}
-		p{
-			width: 50%;
-		}
-		button{
+		button {
 			margin-bottom: 30px;
 		}
-		.messages{
-			border-bottom: 1px solid #6666ff;
+		.messages {
+			border-bottom: 2px solid #000000;
+			border-top: 2px solid #000000;
+			text-align: center;
+			padding: 20px 0px 0px 20px;
 		}
-		#speed{
+		#speed {
 			width: 20em;
+		}
+		#centered {
+			display: inline-block;
+			width: 75%;
 		}
 	</style>
 </head>
@@ -23,19 +27,22 @@
 <body>
 
 	<div class="messages">
-		<p id="email1">
-		Dear Professor Radley after reviewing the notes from class on Monday. | There was something that seemed odd to me. | In Charlotte Perkins Gilman. | The ending can be interpreted in different ways correct. |  In my notes I wrote that the ending can be seen as both a triumph for the protagonist as well as a tragic end. |  A float representing the rate value. | It can range between 0.1 (lowest) and 10 (highest), with 1 being the default pitch for the current platform or voice, which should correspond to a normal speaking rate. |  Other values act as a percentage relative to this, so for example 2 is twice as fast, 0.5 is half as fast, etc. 	| 	
-		<br /><br/>
-		Thank you in advance.
-		</p>
-		<button type="button" id="email1Btn"  onclick="readMyEmail('email1')">Read my email</button>
-		
-		<button type="button" id="emailBtnSTOP" onclick="readMyEmailSTOP('email1')">Stop</button>
-		<input id="speed" type="range" min=".8" max="3" value="1" step=".1" onchange="changeSpeed(this.value)" />
-		<span id="range">1</span>
-		<br>
-		<button type="button" id="email1Btn"  onclick="Rewind()">Rewind</button>
-		<button type="button" id="email1Btn"  onclick="Fastfoward()">Fastfoward</button>
+		<div id="centered">
+			<p id="email1">
+			Dear Professor Radley, after reviewing the notes from class on Monday, there was something that seemed odd to me. In Charlotte Perkins Gilman's "The Yellow Wallpaper," the ending can be interpreted in different ways, correct? In my notes, I wrote that the ending can be seen as both a triumph for the protagonist as well as a tragic end.  A float representing the rate value. It can range between 0.1 (lowest) and 10 (highest), with 1 being the default pitch for the current platform or voice, which should correspond to a normal speaking rate.  Other values act as a percentage relative to this, so for example 2 is twice as fast, 0.5 is half as fast, etc.	
+			<br /><br/>
+			Thank you in advance.
+			</p>
+
+			<button type="button" id="email1Btn"  onclick="readMyEmail('email1')">Read my email</button>
+			
+			<button type="button" id="emailBtnSTOP" onclick="readMyEmailSTOP('email1')">Stop</button>
+			<input id="speed" type="range" min=".8" max="3" value="1" step=".1" onchange="changeSpeed(this.value)" />
+			<span id="range">1</span>
+			<br>
+			<button type="button" id="email1Btn"  onclick="Rewind()">Rewind</button>
+			<button type="button" id="email1Btn"  onclick="Fastfoward()">Fastfoward</button>
+		</div>
 	</div>
 
 	
@@ -54,6 +61,7 @@
 		function isNumeric(n) {
 		  return !isNaN(parseFloat(n)) && isFinite(n);
 		}
+
 		function changeSpeed(newValue){
 			document.getElementById("range").innerHTML=newValue;
 			window.speechSynthesis.cancel(res);
@@ -62,19 +70,21 @@
 			read(res);	
 		}
 
-		
  		function Rewind(){
  			periodIndex = periodIndex - 1;
  			index3 = period[periodIndex];
- 			window.speechSynthesis.cancel(res);
+ 			window.speechSynthesis.cancel();
  			res = emailBody.slice(index3, emailBody.length);
+ 			console.log(res);
  			read(res);	
  		}
+
  		function Fastfoward(){
  			index3 = period[periodIndex];
  			periodIndex = periodIndex + 1;
  			window.speechSynthesis.cancel(res);
  			res = emailBody.slice(index3, emailBody.length);
+ 			console.log(res);
  			read(res);	
  		}
 
@@ -89,7 +99,7 @@
  		// 			- emailBody, period
  		// 
  		// read()
- 		// 		- reads the text as well as keep and updated index on where the TTS is in the text
+ 		// 		- reads the text as well as keep an updated index on where the TTS is in the text
  		// 		Parameter
  		// 			- "text" is a text body as a sting
  		// 		Uses variables
@@ -99,21 +109,25 @@
  		// 			- At each boundary (space between words) that is passed
  		// 					-  we subtratract index2 from index3 then update index3 by adding the new indexvalue after a boundary occures update (the indexvalue TTS in the orgainal text body emailBody). We doe this by first subtracting index2 from index3 because otherwise the indexvalue if index (index same value as index2) would be added twice to index 3. Then we compare index3 to the values of period, we do this comparision to check if index3 is larger than any  period values, and if it did, that means that a period was passed
  		// 			
- 		// 
+		
+		var res = emailBody.slice(0,0);
+		var msg;
+
 		function readMyEmail(targetEmail){
 			emailBody = document.getElementById(targetEmail).innerText;
-			for (i =0 ; i < emailBody.length; i++){
-				if (emailBody[i] =='.' && !isNumeric(emailBody[i+1]) ){
+			for (i=0 ; i<emailBody.length; i++){
+				if ((emailBody[i] =='.' || emailBody[i] == '?') && !isNumeric(emailBody[i+1]) ){
 					period.push(i);
 				}
 			}
 			read(emailBody);
 		}
-		var res = emailBody.slice(0,0);
+
 		function read(text){
-			var msg = new SpeechSynthesisUtterance(text);
+			msg = new SpeechSynthesisUtterance(text);
 			msg.rate = speed;
 			window.speechSynthesis.speak(msg);
+			window.speechSynthesis.resume();
 			msg.onboundary = function(event) {
 			    var length = text.length;
 			    var index = event.charIndex;
@@ -127,10 +141,9 @@
 				res = text.slice(index, length);
 			};
 		}
+
 		function readMyEmailSTOP(targetEmail){
-			var emailBody = document.getElementById(targetEmail).innerText;
-			var msg = new SpeechSynthesisUtterance(emailBody);
-			window.speechSynthesis.cancel(msg);
+			window.speechSynthesis.cancel();
 			location.reload();
 		}
 		
