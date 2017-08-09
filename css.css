@@ -1,0 +1,75 @@
+input[type=range][orient=vertical]{
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 175px;
+    padding: 0 5px;
+}
+p{
+	font-size: 90%;
+	margin: auto;
+}
+#page1{
+	width: 30em;
+	border: 2.5px limegreen solid;
+	padding-left: 2em;
+	padding-right: 2em;
+	padding-bottom: 1em;
+	margin-left: .5em;
+	position: absolute;
+}
+#page2{
+	width: 30em;
+	border: 1.5px lightgrey solid;
+	padding-left: 2em;
+	padding-right: 2em;
+	padding-bottom: 1em;
+	margin-left: .5em;
+	position: absolute;
+	top: 24em;
+}
+#page3{
+	width: 30em;
+	border: 1.5px lightgrey solid;
+	padding-left: 2em;
+	padding-right: 2em;
+	padding-bottom: 1em;
+	margin-left: .5em;
+	position: absolute;
+	top: 46em;
+	left: .5em;
+}
+#controller{
+	border: 1.5px solid red;
+	padding: 1em;
+	position: fixed;
+	top: 6em;
+	left: 44em;
+	width: 20em;
+	height: 10em;
+}
+#reading{
+	position: absolute;
+	top: 4.5em;
+	left: 1.5em;
+}
+#skimming{
+	margin: auto;
+	position: absolute;
+	top: 1.5em;
+	left: 9.5em;
+	text-align: center;
+}
+#changingSpeed{
+	margin: auto;
+	position: absolute;
+	top: 1em;
+	left: 18em;
+}
+#speed{
+	height: 12em;
+}
+button{
+	margin-bottom: 1em;
+	display: inline;
+}
