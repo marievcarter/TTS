@@ -20,6 +20,19 @@
 			border-bottom: 2px solid #000000;
 			border-top: 2px solid #000000;
 		}
+		.page {
+			border-bottom: 2px solid #000000;
+			border-top: 2px solid #000000;
+			padding: 20px 20px 20px 20px;
+		}
+		.section {
+			border-bottom: 0.5px solid #000000;
+			border-top: 0.5px solid #000000;
+			padding: 20px 20px 20px 20px;
+		}
+		.article {
+
+		}
 	</style>
 	<script
   src="http://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -33,142 +46,136 @@
 <!--All <p> in articles are sentences-->
 <div class="article messages" id="article1">
 </div>
-
-
-
-	<div class="messages">
-		<div id="centered">
-			<p id="email1">
-			Dear Professor Radley, after reviewing the notes from class on Monday, there was something that seemed odd to me. In Charlotte Perkins Gilman's "The Yellow Wallpaper," the ending can be interpreted in different ways, correct? In my notes, I wrote that the ending can be seen as both a triumph for the protagonist as well as a tragic end.  A float representing the rate value. It can range between 0.1 (lowest) and 10 (highest), with 1 being the default pitch for the current platform or voice, which should correspond to a normal speaking rate.  Other values act as a percentage relative to this, so for example 2 is twice as fast, 0.5 is half as fast, etc.	
-			<br/><br/>
-			Thank you in advance.
-			</p>
-
-			<button type="button" id="email1Btn"  onclick="readMyEmail('email1')">Read my email</button>
-			
-			<button type="button" id="emailBtnSTOP" onclick="readMyEmailSTOP('email1')">Stop</button>
-			<input id="speed" type="range" min=".8" max="3" value="1" step=".1" onchange="changeSpeed(this.value)" />
-			<span id="range">1</span>
-			<br>
-			<button type="button" id="email1Btn"  onclick="Rewind()">Rewind</button>
-			<button type="button" id="email1Btn"  onclick="Fastfoward()">Fastfoward</button>
-		</div>
-	</div>
-
 	
 
 	<script type="text/javascript">
 
 
-		var speed = 1.0;	
-		var emailBody = "";
-		var period = [0];
-		var periodIndex = 0;
-		var index2 = 0;
-		var index3 = 0;
+///////////////////////////////////////////////////////////////////////////
+ 		pageIndex = 0;
+ 		sectionIndex = 0;
+ 		sentenceIndex = 0;
+ 		sentenceTotal = 0;
 
-
-		function isNumeric(n) {
-		  return !isNaN(parseFloat(n)) && isFinite(n);
-		}
-
-		function changeSpeed(newValue){
-			document.getElementById("range").innerHTML=newValue;
-			window.speechSynthesis.cancel(res);
-			index3 = index3 + index2;
-			speed =  parseFloat(newValue);
-			read(res);	
-		}
-
- 		function Rewind(){
- 			periodIndex = periodIndex - 1;
- 			index3 = period[periodIndex];
- 			window.speechSynthesis.cancel();
- 			res = emailBody.slice(index3, emailBody.length);
- 			console.log(res);
- 			read(res);	
- 		}
-
- 		function Fastfoward(){
- 			index3 = period[periodIndex];
- 			periodIndex = periodIndex + 1;
- 			window.speechSynthesis.cancel(res);
- 			res = emailBody.slice(index3, emailBody.length);
- 			console.log(res);
- 			read(res);	
- 		}
-
- 		//get keycodes for each key
+ 		//skip forwards and backwards using keycodes for 'd' & 'a'
  		$("body").on("keypress", function(evt) {
- 			console.log(evt.keyCode);
-
- 			if(keyCode = 100) {
- 				console.log("correct");
- 				read(sentence1)
+ 			console.log(evt.which);
+ 			if(evt.which == 100) {
+ 				console.log("forward");
+ 				forwardSentence();
+ 			} 
+ 			if(evt.which == 119) {
+ 				console.log("nextsection")
+ 				forwardSection();
+ 			}
+ 			if(evt.which == 113) {
+ 				console.log("nextPage");
+ 				forwardPage();
+ 			}
+ 			if (evt.which == 97) {
+ 				console.log("backwards");
+ 				if(sentenceIndex <= contents.length) {
+ 					sectionIndex--;
+ 					sentenceIndex=sentenceIndex.length-1;
+ 					readTest(contents[pageIndex][sectionIndex][sentenceIndex]);
+ 				}
+ 				else {
+ 					readTest(contents[pageIndex][sectionIndex][sentenceIndex]);
+ 				}
+ 				sentenceIndex--;
+ 				console.log(contents);
  			}
  		})
+
+ 		function forwardSentence() {
+ 			console.log("sentence called")
+ 			if(sentenceIndex >= contents[pageIndex][sectionIndex].length){
+ 				forwardSection();
+ 			} else {
+ 			readTest(contents[pageIndex][sectionIndex][sentenceIndex]);
+ 			sentenceIndex++;
+ 		}
+ 		}
+
+ 		function forwardSection(){
+ 			console.log("section called")
+ 			sectionIndex++;
+ 				sentenceIndex=0;
+ 			if(sectionIndex >= contents[pageIndex].length) {
+ 				forwardPage();
+ 			} else {
+ 				readTest(contents[pageIndex][sectionIndex][sentenceIndex]);
+ 				sentenceIndex++;
+ 			}
+ 		}
+
+ 		function forwardPage() {
+ 			console.log("page called")
+ 			pageIndex++;
+ 			sectionIndex=0;
+ 			sentenceIndex=0;
+ 			if(pageIndex >= contents.length) {
+ 				pageIndex=0;
+ 				readTest(contents[pageIndex][sectionIndex][sentenceIndex]);
+ 				sentenceIndex++;
+ 			} else {
+ 			readTest(contents[pageIndex][sectionIndex][sentenceIndex]);
+ 			sentenceIndex++;
+ 			}
+ 		}
+
+ 		function backwards(){
+ 		}
 
  		contents = [
  		  [
  		    [
- 		      'page 1 section 1 sentence 1',
- 		      'page 1 section 1 sentence 2'
+ 		      'The Activity and Art of Reading. ',
+ 		      'This is a book for readers and for those who wish to become readers. ',
+ 		      'Particularly, it is for readers of books. ',
+ 		      'Even more particularly, it is for those whose main purpose in reading books is to gain increased understanding. '
  		    ],
  		    [
- 		      'page 1 section 2 sentence 1'
+ 		      'By readers we mean people who are still accustomed, as almost every literate and intelligent person used to be, to gain a large share of their information about and their understanding of the world from the written word. '
  		    ]
  		  ],
  		  [
  		    [
- 		      'page 2 section 1 sentence 1'
+ 		      'Not all of it, of course; even in the days before radio and television, a certain amount of information and understanding was acquired through spoken words and through observation. ',
+ 		      'But for intelligent and curious people that was never enough. ',
+ 		      'They knew that they had to read too, and they did read. '
  		    ]
  		  ]
  		]
-
- 		sentenceIndex = 1
 
  		articleEle = $('.article')
 
  		// each page
  		for(var i = 0; i < contents.length; i++) {
- 			pageEle = $("<div id='page" + i + "'/>")
+ 			pageEle = $("<div class='page' id='page" + i + "'/>")
  			articleEle.append(pageEle);
  			// each section
  			for(var j = 0; j < contents[i].length; j++) {
- 				sectionEle = $("<div id='section" + j + "'/>")
+ 				sectionEle = $("<div class='section' id='section" + j + "'/>")
  				pageEle.append(sectionEle);
  				// each sentence
  				for (var k = 0; k < contents[i][j].length; k++) {
- 					sentenceEle = $("<p id='sentence" + k + "'>" + contents[i][j][k] + "</p>")
+ 					sentenceEle = $("<span class='sentence' id='sentence" + k + "'>" + contents[i][j][k] + "</span>")
  					sectionEle.append(sentenceEle);
- 					console.log(i+1,j+1,k+1,sentenceIndex);
- 					sentenceIndex ++;
+ 					console.log(i+1,j+1,k+1,sentenceTotal);
+ 					sentenceTotal++;
  				}
  			}
  		}
 
+ 		function readTest(text){
+			speech = new SpeechSynthesisUtterance(text);
+			window.speechSynthesis.speak(speech);
+			window.speechSynthesis.resume();
+		}
 
- 		//READING
- 		// readMyEmail()
- 		// 		- finds all indexes of '.' and records them in array period
- 		// 			as well as create a string from the text body
- 		// 		Parameter
- 		// 			- "targetEmail" is the id if the text body
- 		// 		Uses variables
- 		// 			- emailBody, period
- 		// 
- 		// read()
- 		// 		- reads the text as well as keep an updated index on where the TTS is in the text
- 		// 		Parameter
- 		// 			- "text" is a text body as a sting
- 		// 		Uses variables
- 		// 			- index2, index3, period, periodIndex, res
- 		// 		Logic
- 		// 			- Reads the text
- 		// 			- At each boundary (space between words) that is passed
- 		// 					-  we subtratract index2 from index3 then update index3 by adding the new indexvalue after a boundary occures update (the indexvalue TTS in the orgainal text body emailBody). We doe this by first subtracting index2 from index3 because otherwise the indexvalue if index (index same value as index2) would be added twice to index 3. Then we compare index3 to the values of period, we do this comparision to check if index3 is larger than any  period values, and if it did, that means that a period was passed
- 		// 			
 		
+		/*
 		var res = emailBody.slice(0,0);
 		var msg;
 
@@ -204,14 +211,8 @@
 		function readMyEmailSTOP(targetEmail){
 			window.speechSynthesis.cancel();
 			location.reload();
-		}
+		}*/
 		
-
-		// Vocab
-		// 		- var period = is an array that lists all of the indexes that has a period.
-		// 		- var periodIndex = is number that 
-		// 		- var emailBody = is your entire text 
-
 		
 		//SPEED
 		// changeSpeed()
@@ -227,29 +228,6 @@
 		// 		Returns 
 		// 			- the text with a new reading rate
 
-		//SKIPPING
-		// Rewind() OR Fastfoward()
-		// 		- finds the next period to skip ahead or back to 
-		// 		Uses variables
-		// 			- period, periodIndex, emailBody, index3
-		//	 	Logic
-		// 			- Is called when rewind/fastfoward button clicked
-		// 			- index3 is updated and set equal to periodIndex AND if rewind -1 to periodIndex / if 
-		// 				fastfoward +1 to periodIndex
-		//			- The # pulled from period[periodIndex] will be a index value in emailBody that  
-		// 				will tell where the next "." you are skipping to
-		//			- stops the text from reading, updates the starting index value using 
-		// 				emailBody and resets res, then starts reading the text again 
-		// 		Returns 
-		// 			- a new text starting at the sentence before or after the currant instant in text.  
-
-
-		
-
-		
-
-
-		//STOP
 
 
 	</script>
