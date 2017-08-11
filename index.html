@@ -6,41 +6,39 @@
 	
 </head>
 
-	<style>
-		
-	</style>
+
 
 <body>
 
 	<div id="page1">
 		<qoute>page1</qoute><br>
 		
-		<div id="email0">
+		<div id="email1">
 			<h4>Email number 1:</h4>
 			<p> Dear Professor Radley, <br> 
-				After reviewing the notes from class on Monday. | There was something that seemed odd to me. | In Charlotte Perkins Gilman. | The ending can be interpreted in different ways correct. |  In my notes I wrote that the ending can be seen as both a triumph for the protagonist as well as a tragic end. |  A float representing the rate value. 
+				After reviewing the notes from class on Monday. There was something that seemed odd to me. In Charlotte Perkins Gilman. The ending can be interpreted in different ways correct. In my notes I wrote that the ending can be seen as both a triumph for the protagonist as well as a tragic end. A float representing the rate value. 
 			</p>
 		</div>
 		
-		<div id ='email1'>
+		<div id ='email2'>
 			<h4>Email number 2:</h4>
 			<p> Dear Professor Radley, <br> 
-				A float representing the rate value. | It can range between 0.1 (lowest) and 10 (highest), with 1 being the default pitch for the current platform or voice, which should correspond to a normal speaking rate. |  Other values act as a percentage relative to this, so for example 2 is twice as fast, 0.5 is half as fast, etc. 	| 	
+				A float representing the rate value. It can range between 0.1 (lowest) and 10 (highest), with 1 being the default pitch for the current platform or voice, which should correspond to a normal speaking rate. Other values act as a percentage relative to this, so for example 2 is twice as fast, 0.5 is half as fast, etc. 	
 			</p>
 		</div>
 	</div>
 
 
-	<div id="page2">
+	<div style="display:none;" id="page2">
 		<qoute>page2</qoute><br>
-		<div id="email2">
+		<div id="email3">
 			<h4>Email number 3:</h4>
 			<p> Dear Dr. Michaels, <br>
 				I write to request the slides and notes from your 8am History 101 class from last Friday, October 1st. I know you usually post them online, however I have not been able to locate them on your website. I am currently preparing for mid-term exams and would appreciate the information. I was unable to attend this particular lecture. 
 			</p>
 		</div>
 
-		<div id="email3">
+		<div id="email4">
 			<h4>Email number 4:</h4>
 			<p> Dear Dr. Michaels, <br>
 				I just wanted to let you know that I will not be in New York next week, but I'll be online all week and can meet over Skype! Next week to continue iterating over our designs. It would be great if we can get your input on the lo-fi prototypes as soon as possible so Priscilla and I can focus and continue to iterate on our designs. 
@@ -48,17 +46,17 @@
 		</div>
 	</div>
 
-	<div id="page3">
+	<div style="display:none;"  id="page3">
 		<qoute>page3</qoute><br>
 		
-		<div id="email4">
+		<div id="email5">
 			<h4>Email number 5:</h4>
 			<p> Dear Dr. Shiri, <br>
 				My team and I are currently working on a project that is developing TTS using a hardware design.  We are co conducting the the goal to identify how to improve our TTS design to  ore intuitive as well as also allow our its users to be more efficient when using TTS. We are reaching out to in hopes that you can help us find individuals that use TTS and would be interested in formally testing our design and providing feedback during a 40 min study at Cornell Tech.
 			</p>
 		</div>
 
-		<div id="email5">
+		<div id="email6">
 			<h4>Email number 6:</h4>
 			<p> Dear Dr. Shiri, <br>
 				My team and I are currently working on a project that is developing TTS using a hardware design.  We are co conducting the the goal to identify how to improve our TTS design to  ore intuitive as well as also allow our its users to be more efficient when using TTS. Can you please notify your deparment that we will be conducting this study. 
@@ -70,8 +68,10 @@
 		
 
 		<div id="reading">
-			<button type="button" id="Read"  onclick="readMyEmail()">Read</button>
+			<button type="button" id="Read"  onclick="readMyEmail()">Read</button><br>
+			<button type="button" id="Pause" onclick="readMyEmailPAUSE()">Pause</button><br>
 			<button type="button" id="Stop" onclick="readMyEmailSTOP()">Stop</button>
+			
 		</div>
 		
 
@@ -100,9 +100,6 @@
 
 	</div>
 
-	
-
-	
 
 	<script type="text/javascript">
 
@@ -122,8 +119,7 @@
 
 		var pageNum = 1;
 		var page = 'page1';
-		var titleNum = 0.0;
-		var p = 0;
+		var p = 1;
 		var reading = 'page1';
 
 		//READING 		
@@ -142,6 +138,7 @@
 			msg.rate = speed;
 			window.speechSynthesis.speak(msg);
 			msg.onboundary = function(event) {
+				console.log("goes in here");
 			    var length = text.length;
 			    var index = event.charIndex;
 			    var chr = text.charAt(index);
@@ -151,16 +148,29 @@
 			    if (index3 > period[periodIndex]) {
 			    	periodIndex = periodIndex + 1;
 			    } 
+			    // if (index == length-2){
+			    // 	pageNum ++;
+			    // 	page = page + pageNum;
+			    // 	reading = page;
+			    // 	readMyEmail();
+			    // }
+			    console.log(chr);
+			    console.log(index, length);
 				res = text.slice(index, length);
 			};
 		}
 
-		// STOP
-		function readMyEmailSTOP(){
-			// var emailBody = document.getElementById('page1').innerText;
+		// PAUSE
+		function readMyEmailPAUSE(){
 			var msg = new SpeechSynthesisUtterance(emailBody);
 			window.speechSynthesis.cancel(msg);
-			// location.reload();
+		}
+
+		// STOP
+		function readMyEmailSTOP(){
+			var msg = new SpeechSynthesisUtterance(emailBody);
+			window.speechSynthesis.cancel(msg);
+			location.reload();
 		}
 
 		
@@ -170,38 +180,42 @@
 			window.speechSynthesis.cancel(msg);
  			if (ev == 'pages' ){
 				var concept = document.getElementById(page);
-				concept.style.border = "1.5px solid lightgrey";
+				concept.style.display = "none";
 				var text = document.getElementsByTagName("h4")[p];
 				text.style.border = "none";
-				if (pageNum == 2) {p = 4;}
-				else if (pageNum == 1) {p = 2;}
+				if (pageNum == 2) {p = 5;}
+				else if (pageNum == 1) {p = 3;}
 				if(pageNum == 3){ 
 					pageNum = 1;
-					p = 0;
+					p = 1;
 				}
 				else { pageNum ++;}
-				
 				page = 'page' + pageNum;
 				reading = page;
 				var concept = document.getElementById(page);
-				concept.style.border = "2.5px solid limegreen";
+				concept.style.display = "block";
 				var text = document.getElementsByTagName("h4")[p];
 				text.style.border = "2.5px solid lightblue";
 				readMyEmail();
  			}
- 			else if ( ev == 'titles'){
- 				var text = document.getElementsByTagName("h4")[p];
+ 			else if ( ev == 'titles'){			
+				var text = document.getElementsByTagName("h4")[p-1];
 				text.style.border = "none";
-				if(p == 1 || p == 3){ pageNum++; }
-				else if ( p == 5){ pageNum == 1;}
-				p++;
 				var concept = document.getElementById(page);
-				concept.style.border = "1.5px solid lightgrey";
+				concept.style.display = "none";
+				if(p == 2 || p == 4){ 
+					pageNum++; 
+				}
+				else if ( p == 6){ 
+					pageNum = 1;
+					p = 0;
+				}
+				p++;
 				page = 'page' + pageNum;
 				reading = 'email' + p;
 				var concept = document.getElementById(page);
-				concept.style.border = "2.5px solid limegreen";
-				var text = document.getElementsByTagName("h4")[p];
+				concept.style.display = "block";
+				var text = document.getElementsByTagName("h4")[p-1];
 				text.style.border = "2.5px solid lightblue";
 				readMyEmail();
  			}
@@ -220,17 +234,44 @@
 			window.speechSynthesis.cancel(msg);
  			if (ev == 'pages' ){
 				var concept = document.getElementById(page);
-				concept.style.border = "1.5px solid lightgrey";
-				if (pageNum == 1){ pageNum = 3; }
-				else{ pageNum = pageNum - 1;}
+				concept.style.display = "none";
+				var text = document.getElementsByTagName("h4")[p];
+				text.style.border = "none";
+				if (pageNum == 2) {p = 2;}
+				else if (pageNum == 3) {p = 4;}
+				if(pageNum == 1){ 
+					pageNum = 3;
+					p = 6;
+				}
+				else { pageNum = pageNum - 1;}
 				page = 'page' + pageNum;
+				reading = page;
 				var concept = document.getElementById(page);
-				concept.style.border = "2.5px solid limegreen";
+				concept.style.display = "block";
+				var text = document.getElementsByTagName("h4")[p];
+				text.style.border = "2.5px solid lightblue";
 				readMyEmail();
  			}
- 			else if ( ev == 'titles'){ 
-
-
+ 			else if ( ev == 'titles'){			
+				var text = document.getElementsByTagName("h4")[p-1];
+				text.style.border = "none";
+				var concept = document.getElementById(page);
+				concept.style.display = "none";
+				if(p == 3 || p == 5){ 
+					pageNum = pageNum -1; 
+				}
+				else if ( p == 1){ 
+					pageNum = 3;
+					p = 7;
+				}
+				p = p -1;
+				page = 'page' + pageNum;
+				reading = 'email' + p;
+				var concept = document.getElementById(page);
+				concept.style.display = "block";
+				var text = document.getElementsByTagName("h4")[p-1];
+				text.style.border = "2.5px solid lightblue";
+				readMyEmail();
  			}
  			else if ( ev == 'sentences'){
 	 			periodIndex = periodIndex - 1;
