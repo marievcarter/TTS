@@ -6,87 +6,79 @@
 	
 </head>
 
-	<style>
-		
-	</style>
+
 
 <body>
 
-	<div id="page1">
-		<qoute>page1</qoute><br>
+	<div style="display:block;" id="page0">
+
+		<h6>page1</h6>
+
+		<h4>Email number 1:</h4>
+			<p> Dear Dr. Michaels,</p>
+			<span>I write to request the slides and notes from your 8am History 101 class from last Friday, October 1st.</span><span> I know you usually post them online, however I have not been able to locate them on your website. </span><span> I am currently preparing for mid-term exams and would appreciate the information.</span><span> I was unable to attend this particular lecture. </span>
+
+		<h4>Email number 2:</h4>
+			<p> Dear Dr. Michaels, </p>
+			<span>I just wanted to let you know that I will not be in New York next week, but I'll be online all week and can meet over Skype!</span><span> Next week to continue iterating over our designs. </span><span>It would be great if we can get your input on the lo-fi prototypes as soon as possible so Priscilla and I can focus and continue to iterate on our designs. </span>
+	</div>
+
+	<div style="display:none;"  id="page1">
 		
-		<div id="email0">
-			<h4>Email number 1:</h4>
-			<p> Dear Professor Radley, <br> 
-				After reviewing the notes from class on Monday. | There was something that seemed odd to me. | In Charlotte Perkins Gilman. | The ending can be interpreted in different ways correct. |  In my notes I wrote that the ending can be seen as both a triumph for the protagonist as well as a tragic end. |  A float representing the rate value. 
-			</p>
-		</div>
+		<h6>page2</h6>
+
+		<h4>Email number 3:</h4>
+			<p> Dear Dr. Shiri, </p>
+			<span>My team and I are currently working on a project that is developing TTS using a hardware design. </span><span> We are co conducting the the goal to identify how to improve our TTS design to  ore intuitive as well as also allow our its users to be more efficient when using TTS. </span><span> We are reaching out to in hopes that you can help us find individuals that use TTS and would be interested in formally testing our design and providing feedback during a 40 min study at Cornell Tech.</span>
 		
-		<div id ='email1'>
-			<h4>Email number 2:</h4>
-			<p> Dear Professor Radley, <br> 
-				A float representing the rate value. | It can range between 0.1 (lowest) and 10 (highest), with 1 being the default pitch for the current platform or voice, which should correspond to a normal speaking rate. |  Other values act as a percentage relative to this, so for example 2 is twice as fast, 0.5 is half as fast, etc. 	| 	
-			</p>
-		</div>
+		<h4>Email number 4:</h4>
+			<p> Dear Dr. Shiri, </p>
+			<span> My team and I are currently working on a project that is developing TTS using a hardware design. </span><span> We are co conducting the the goal to identify how to improve our TTS design to  ore intuitive as well as also allow our its users to be more efficient when using TTS. </span><span>Can you please notify your deparment that we will be conducting this study. </span>
 	</div>
 
 
-	<div id="page2">
-		<qoute>page2</qoute><br>
-		<div id="email2">
-			<h4>Email number 3:</h4>
-			<p> Dear Dr. Michaels, <br>
-				I write to request the slides and notes from your 8am History 101 class from last Friday, October 1st. I know you usually post them online, however I have not been able to locate them on your website. I am currently preparing for mid-term exams and would appreciate the information. I was unable to attend this particular lecture. 
-			</p>
-		</div>
+	<div style="display:none;"  id="page2">
 
-		<div id="email3">
-			<h4>Email number 4:</h4>
-			<p> Dear Dr. Michaels, <br>
-				I just wanted to let you know that I will not be in New York next week, but I'll be online all week and can meet over Skype! Next week to continue iterating over our designs. It would be great if we can get your input on the lo-fi prototypes as soon as possible so Priscilla and I can focus and continue to iterate on our designs. 
-			</p>
-		</div>
-	</div>
+		<h6>page3</h6>
 
-	<div id="page3">
-		<qoute>page3</qoute><br>
+		<h4>Email number 5:</h4>
+			<p>Dear Professor Radley, </p>
+			<span>After reviewing the notes from class on Monday.</span><span>There was something that seemed odd to me. </span><span>In Charlotte Perkins Gilman. </span><span> The ending can be interpreted in different ways correct.</span><span> In my notes I wrote that the ending can be seen as both a triumph for the protagonist as well as a tragic end. </span><span>A float representing the rate value.</span>
+			<p>Specification has not stabilized, check the compatibility table for usage in various browsers.</p>
 		
-		<div id="email4">
-			<h4>Email number 5:</h4>
-			<p> Dear Dr. Shiri, <br>
-				My team and I are currently working on a project that is developing TTS using a hardware design.  We are co conducting the the goal to identify how to improve our TTS design to  ore intuitive as well as also allow our its users to be more efficient when using TTS. We are reaching out to in hopes that you can help us find individuals that use TTS and would be interested in formally testing our design and providing feedback during a 40 min study at Cornell Tech.
-			</p>
-		</div>
-
-		<div id="email5">
-			<h4>Email number 6:</h4>
-			<p> Dear Dr. Shiri, <br>
-				My team and I are currently working on a project that is developing TTS using a hardware design.  We are co conducting the the goal to identify how to improve our TTS design to  ore intuitive as well as also allow our its users to be more efficient when using TTS. Can you please notify your deparment that we will be conducting this study. 
-			</p>
-		</div>
+		<h4>Email number 5:</h4>
+			<p>Dear Professor Radley, </p>
+			<span>A float representing the rate value.</span><span> It can range between 0.1 (lowest) and 10 (highest), with 1 being the default pitch for the current platform or voice, which should correspond to a normal speaking rate.</span>
+			<span>A float representing the rate value. It can range between 0.1 (lowest). </span><span> and 10 (highest), with 1 being the. default pitch for the current. platform or voice, which should correspond to a normal speaking rate.</span>
+		
 	</div>
 	
+
+
+
 	<div id="controller">
 		
 
 		<div id="reading">
-			<button type="button" id="Read"  onclick="readMyEmail()">Read</button>
+			<button type="button" id="Read"  onclick="readMyEmail()">Read</button><br>
+			<button type="button" id="Pause" onclick="readMyEmailPAUSE()">Pause</button><br>
 			<button type="button" id="Stop" onclick="readMyEmailSTOP()">Stop</button>
+			
 		</div>
 		
 
 		<div id="skimming">
 			<form action="" id="radiobutton">
 		    	<p> Skim Pages</p>
-		    	<button type="button" id="foward"  onclick="Rewind('pages')"><<</button>
-				<button type="button" id="backward"  onclick="Fastfoward('pages')">>></button>
+		    	<button type="button" id="foward"  onclick="Rewind('h6')"><<</button>
+				<button type="button" id="backward"  onclick="Fastfoward('h6')">>></button>
 				
 				<p> Skim Headers</p>
-		    	<button type="button" id="foward"  onclick="Rewind('titles')"><<</button>
-				<button type="button" id="backward"  onclick="Fastfoward('titles')">>></button>
+		    	<button type="button" id="foward"  onclick="Rewind('h4')"><<</button>
+				<button type="button" id="backward"  onclick="Fastfoward('h4')">>></button>
 				<p> Skim Sentences</p>
-		    	<button type="button" id="foward"  onclick="Rewind('sentences')"><<</button>
-				<button type="button" id="backward"  onclick="Fastfoward('sentences')">>></button>
+		    	<button type="button" id="foward"  onclick="Rewind('p')"><<</button>
+				<button type="button" id="backward"  onclick="Fastfoward('p')">>></button>
 
 			
 		  	</form>
@@ -100,156 +92,149 @@
 
 	</div>
 
-	
 
-	
+	<script >
 
-	<script type="text/javascript">
-
+		function isNumeric(n) { return !isNaN(parseFloat(n)) && isFinite(n); }
 
 		var speed = 1.0;	
 		var emailBody = "";
-		var period = [0];
-		var periodIndex = 0;
-		var index2 = 0;
-		var index3 = 0;
+		var i = 0;
+		var reading = 'page' + i;
+		var sentences = [];
+		var i3 = 0;
 
 
-		function isNumeric(n) {
-		  return !isNaN(parseFloat(n)) && isFinite(n);
-		}
-
-
-		var pageNum = 1;
-		var page = 'page1';
-		var titleNum = 0.0;
-		var p = 0;
-		var reading = 'page1';
 
 		//READING 		
 		function readMyEmail(){
-			emailBody = document.getElementById(reading).innerText;
-			for (i =0 ; i < emailBody.length; i++){
-				if (emailBody[i] =='.' && !isNumeric(emailBody[i+1]) ){
-					period.push(i);
+			emailBody = document.getElementById(reading);
+			sentences = emailBody.getElementsByTagName('*');
+			read();
+		}
+
+
+		function read(){
+			sentences[i3].style.backgroundColor = "yellow";
+			var msg = new SpeechSynthesisUtterance(sentences[i3].innerText);
+			emailBody = msg;
+			msg.rate = speed;
+			window.speechSynthesis.speak(msg);	
+			
+			msg.onend = function(event) {
+				sentences[i3].style.backgroundColor = "initial";
+				i3++;
+				read();
+			}
+		}
+
+
+		// SKIPPING
+		function Fastfoward(ev){
+			sentences[i3].style.backgroundColor = "initial";
+			if ( ev == 'p'){
+				if (i3 >= sentences.length-1){
+					i3 = 0;
+				}
+				window.speechSynthesis.cancel(emailBody);
+			}
+			else if (  ev == 'h4' ){
+				var i2 = i3;
+				while ( sentences[i2+1].localName != ev){
+					if (i2 >= sentences.length-2){
+						i2 = 0;
+					}
+					else{
+						i2++;
+					}
+				}
+				window.speechSynthesis.cancel(emailBody);
+				i3 = i2;
+			}
+			else if (  ev == 'h6' ){
+				var x = document.getElementById(reading);
+				x.style.display = "none";
+				var msg = new SpeechSynthesisUtterance(sentences[i3].innerText);
+				window.speechSynthesis.cancel(msg);
+				i3 = 0;
+				sentences = [];
+				if (i == 2){
+					i = 0;
+					reading = 'page' + i;
+					var x = document.getElementById(reading);
+					x.style.display = "block";
+					readMyEmail();
+				}
+				else{
+					i ++;
+					reading = 'page' + i;
+					var x = document.getElementById(reading);
+					x.style.display = "block";
+					readMyEmail();
 				}
 			}
-			read(emailBody);
 		}
-		var res = emailBody.slice(0,0);
-		function read(text){
-			var msg = new SpeechSynthesisUtterance(text);
-			msg.rate = speed;
-			window.speechSynthesis.speak(msg);
-			msg.onboundary = function(event) {
-			    var length = text.length;
-			    var index = event.charIndex;
-			    var chr = text.charAt(index);
-			    // subtract index2 first because then the current indexvalue would be added twice.  
-			   	index3 = index3 - index2 + index;
-			   	index2 = index;
-			    if (index3 > period[periodIndex]) {
-			    	periodIndex = periodIndex + 1;
-			    } 
-				res = text.slice(index, length);
-			};
+
+		// Still have to figure out how to cycle backwards 
+		function Rewind(ev){
+			sentences[i3].style.backgroundColor = "initial";
+			if ( ev == 'p' ){
+				if (i3 == 0 ){ i3 = sentences.length+2; }
+				else{ i3 = i3 - 2; }
+				window.speechSynthesis.cancel(emailBody);
+			}
+			else if (  ev == 'h4' ){
+				var i2 = i3;
+				while ( sentences[i2+1].localName != ev){
+					if (i2 <= 0){ i2 = sentences.length-1;}
+					else{ i2 = i2 - 2; }
+				}
+				window.speechSynthesis.cancel(emailBody);
+				i3 = i2;
+			}
+			else if (  ev == 'h6' ){
+				var x = document.getElementById(reading);
+				x.style.display = "none";
+				var msg = new SpeechSynthesisUtterance(sentences[i3].innerText);
+				window.speechSynthesis.cancel(msg);
+				i3 = 0;
+				sentences = [];
+				if (i == 0){
+					i = 2;
+					reading = 'page' + i;
+					var x = document.getElementById(reading);
+					x.style.display = "block";
+					readMyEmail();
+				}
+				else{
+					i --;
+					reading = 'page' + i;
+					var x = document.getElementById(reading);
+					x.style.display = "block";
+					readMyEmail();
+				}
+			}
+		}
+
+		// PAUSE
+		function readMyEmailPAUSE(){
+			var msg = new SpeechSynthesisUtterance(emailBody);
+			window.speechSynthesis.cancel(msg);
 		}
 
 		// STOP
 		function readMyEmailSTOP(){
-			// var emailBody = document.getElementById('page1').innerText;
-			var msg = new SpeechSynthesisUtterance(emailBody);
+			var msg = new SpeechSynthesisUtterance(sentences[i3-1].innerText);
 			window.speechSynthesis.cancel(msg);
-			// location.reload();
+			location.reload();
 		}
-
-		
-		// SKIPPING
-		function Fastfoward(ev){
- 			var msg = new SpeechSynthesisUtterance(emailBody);
-			window.speechSynthesis.cancel(msg);
- 			if (ev == 'pages' ){
-				var concept = document.getElementById(page);
-				concept.style.border = "1.5px solid lightgrey";
-				var text = document.getElementsByTagName("h4")[p];
-				text.style.border = "none";
-				if (pageNum == 2) {p = 4;}
-				else if (pageNum == 1) {p = 2;}
-				if(pageNum == 3){ 
-					pageNum = 1;
-					p = 0;
-				}
-				else { pageNum ++;}
-				
-				page = 'page' + pageNum;
-				reading = page;
-				var concept = document.getElementById(page);
-				concept.style.border = "2.5px solid limegreen";
-				var text = document.getElementsByTagName("h4")[p];
-				text.style.border = "2.5px solid lightblue";
-				readMyEmail();
- 			}
- 			else if ( ev == 'titles'){
- 				var text = document.getElementsByTagName("h4")[p];
-				text.style.border = "none";
-				if(p == 1 || p == 3){ pageNum++; }
-				else if ( p == 5){ pageNum == 1;}
-				p++;
-				var concept = document.getElementById(page);
-				concept.style.border = "1.5px solid lightgrey";
-				page = 'page' + pageNum;
-				reading = 'email' + p;
-				var concept = document.getElementById(page);
-				concept.style.border = "2.5px solid limegreen";
-				var text = document.getElementsByTagName("h4")[p];
-				text.style.border = "2.5px solid lightblue";
-				readMyEmail();
- 			}
- 			else if ( ev == 'sentences'){
-	 			index3 = period[periodIndex];
-	 			periodIndex = periodIndex + 1;
-	 			window.speechSynthesis.cancel(res);
-	 			res = emailBody.slice(index3, emailBody.length);
-	 			read(res);	
-	 		}
- 		}
-
-
- 		function Rewind(ev){
- 			var msg = new SpeechSynthesisUtterance(emailBody);
-			window.speechSynthesis.cancel(msg);
- 			if (ev == 'pages' ){
-				var concept = document.getElementById(page);
-				concept.style.border = "1.5px solid lightgrey";
-				if (pageNum == 1){ pageNum = 3; }
-				else{ pageNum = pageNum - 1;}
-				page = 'page' + pageNum;
-				var concept = document.getElementById(page);
-				concept.style.border = "2.5px solid limegreen";
-				readMyEmail();
- 			}
- 			else if ( ev == 'titles'){ 
-
-
- 			}
- 			else if ( ev == 'sentences'){
-	 			periodIndex = periodIndex - 1;
-	 			index3 = period[periodIndex];
-	 			window.speechSynthesis.cancel(res);
-	 			res = emailBody.slice(index3, emailBody.length);
-	 			read(res);
- 			}
- 		}
- 		
-
 
 		// SPEED
 		function changeSpeed(newValue){
 			document.getElementById('range2').innerHTML=newValue;
-			window.speechSynthesis.cancel(res);
-			index3 = index3 + index2;
 			speed =  parseFloat(newValue);
-			read(res);	
+			window.speechSynthesis.cancel(emailBody);
+			
 		}
 
  		
