@@ -186,7 +186,6 @@
  		}
 
  		function read() {
- 			//document.getElementById('sentence1').style.color = "blue";
  			console.log(pageIndex, sectionIndex, sentenceIndex);
  			var text = contents[pageIndex][sectionIndex][sentenceIndex];
  			var speed = 1.0;
@@ -204,16 +203,6 @@
  			}
 			window.speechSynthesis.speak(speech);
 			window.speechSynthesis.resume();
-			//document.getElementById('sentence1').style.color = "black";
-
-			/*for(var i = 0; i < 10; i++) {
-				speech = new SpeechSynthesisUtterance(text);
-				window.speechSynthesis.speak(speech);
-				window.speechSynthesis.resume();
-				forwardSentence();
-				text=contents[pageIndex][sectionIndex][sentenceIndex]
-				document.getElementById('sentence'+sentenceIndex).style.color = "blue";
-			}*/		
 		}
 
 		function cancel(){
@@ -266,50 +255,6 @@
  				}
  			}
  		}
-
- 		//read();
-		
-		/*
-		function read(text){
-			msg = new SpeechSynthesisUtterance(text);
-			msg.rate = speed;
-			window.speechSynthesis.speak(msg);
-			window.speechSynthesis.resume();
-			msg.onboundary = function(event) {
-			    var length = text.length;
-			    var index = event.charIndex;
-			    var chr = text.charAt(index);
-			    // subtract index2 first because then the current indexvalue would be added twice.  
-			   	index3 = index3 - index2 + index;
-			   	index2 = index;
-			    if (index3 > period[periodIndex]) {
-			    	periodIndex = periodIndex + 1;
-			    } 
-				res = text.slice(index, length);
-			};
-		}
-
-		function readMyEmailSTOP(targetEmail){
-			window.speechSynthesis.cancel();
-			location.reload();
-		}*/
-		
-		
-		//SPEED
-		// changeSpeed()
-		// 		- changes the rate of TTS on the spot, using information from the slider
-		// 		Uses variables
-		// 			- index2, index3
-		// 		Parameter
-		// 			-  "NewWavlue" is the numeric value taken the slider
-		// 		Logic
-		//			- changeSpeed is called when the slider is used, changeSpeed then takes the 
-		// 			number that the slider was changed to, stops the text from reading, changes 
-		// 			the speed, and starts reading the text again
-		// 		Returns 
-		// 			- the text with a new reading rate
-
-
 
 	</script>
 
