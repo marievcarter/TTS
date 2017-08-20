@@ -11,6 +11,9 @@ Text to Speech Interactions - using Mozilla SpeechSynthesis API
 
 ## Touchpad Version
 
+### Phone Remote Touch Commands
+- Tap: Play/Pause
+
 ### Secondary Keyboard Shortcuts
 - Play:
 - Pause:
