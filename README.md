@@ -1,6 +1,16 @@
 # TTS
-Text to Speech project - using Mozilla SpeechSynthesis API
+Text to Speech Interactions - using Mozilla SpeechSynthesis API
 
-  1. Reads a section of text aloud.
-  2. Set reading speed dynamically through interface.
-  3. User can skip to previous and later sentences using buttons on the screen.
+  Reads text aloud and allows for navigation and modification of playback through different interfaces. This version is designed specifically for reading academic articles where the document will likely be split up into pages, sections and sentences rather than continuous or organized into chapters.
+  
+  ###Features:
+  - Set reading speed
+  - Skip to next or previous sentence
+  - Skip to next or previous section
+  - Skip to next or previous page
+
+##Touchpad Version
+
+###Secondary Keyboard Shortcuts
+
+##Dials Version
