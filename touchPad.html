@@ -1,0 +1,317 @@
+<!Doctype html>
+<head>
+	<style>
+		body {
+			padding: 20px 0 0 20px;
+			background: #eee;
+		}
+		button {
+			margin-bottom: 30px;
+		}
+		#speed {
+			width: 20em;
+		}
+		#centered {
+			display: inline-block;
+			width: 75%;
+			border-bottom: 2px solid #000000;
+			border-top: 2px solid #000000;
+		}
+		.page {
+			padding: 20px 20px 20px 20px;
+			/*border-bottom: 2px solid #000000;
+			border-top: 2px solid #000000;
+			background-color: #bcc4c0;*/
+		}
+		.section {
+			padding: 20px 20px 20px 20px;
+			/*border-bottom: 0.5px solid #000000;
+			border-top: 0.5px solid #000000;
+			background-color: #daf2e5;*/
+		}
+		.article {
+			background: #fff;
+  			box-shadow: 0 0 2px rgba(0, 0, 0, .34);
+  			height: 800px;
+  			margin: auto;
+  			position: relative;
+  			width: 700px;
+  			text-align: center;
+			padding: 20px 0px 0px 20px;
+		}
+		p {
+			margin: 2px 2px 2px 2px;
+		}
+		span {
+			font-size: 20px;
+		}
+	</style>
+	<script
+  src="http://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+
+<!--All <p> in articles are sentences-->
+<div class="article" id="article1">
+</div>
+	
+
+	<script type="text/javascript">
+
+ 		pageIndex = 0;
+ 		sectionIndex = 0;
+ 		sentenceIndex = 0;
+ 		sentenceTotal = 0;
+ 		speech = null;
+
+ 		//determine whether the correct key is pressed
+
+ 		$("body").on("keypress", function(evt) {
+ 			console.log(evt.which);
+ 			if(evt.which==49 || evt.which==50 || evt.which==51 || evt.which==52 || evt.which==53) {
+ 				//cancel(contents[pageIndex][sectionIndex][sentenceIndex]);
+ 				setSpeed(evt.which);
+ 				//read(contents[pageIndex][sectionIndex][sentenceIndex]);
+ 			}
+ 			if(evt.which == 112) {
+ 				console.log("read text")
+ 				read();
+ 			}
+ 			if(evt.which == 100) {
+ 				console.log("forward");
+ 				cancel();
+ 				forwardSentence();
+ 				read();
+ 			} 
+ 			if(evt.which == 119) {
+ 				console.log("nextsection")
+ 				cancel();
+ 				forwardSection();
+ 				read();
+ 			}
+ 			if(evt.which == 113) {
+ 				console.log("nextPage");
+ 				cancel();
+ 				forwardPage();
+ 				read();
+ 			}
+ 			if(evt.which == 99) {
+ 				console.log("pause text");
+ 				cancel();
+ 			}
+ 			if(evt.which == 97) {
+ 				console.log("backwards");
+ 				cancel();
+ 				backSentence();
+ 				read();
+ 			}
+ 		})
+
+ 		function setSpeed(keypress) {
+ 			console.log("setSpeed")
+ 			if (keypress==49) {
+ 				speech.rate=0.5;
+ 			}
+ 			if (keypress==50) {
+ 				speech.rate=1.0;
+ 			}
+ 			if (keypress==51) {
+ 				speech.rate=1.5;
+ 			}
+ 			if (keypress==52) {
+ 				speech.rate=2.0;
+ 			}
+ 			if (keypress==53) {
+ 				speech.rate=2.5;
+ 			}
+ 		}
+
+ 		function forwardSentence() {
+ 			console.log("next sentence");
+
+ 			sentenceIndex++;
+ 			if(sentenceIndex >= contents[pageIndex][sectionIndex].length) {
+ 				forwardSection();
+ 			}
+ 		}
+
+ 		function backSentence() {
+ 			console.log("previous sentence");
+ 			sentenceIndex--;
+ 			if(sentenceIndex < 0) {
+ 				backSection();
+ 			}
+ 		}
+
+ 		function forwardSection() {
+ 			console.log("next section")
+ 			sectionIndex++;
+ 			sentenceIndex=0;
+ 			if(sectionIndex >= contents[pageIndex].length) {
+ 				forwardPage();
+ 			}
+ 		}
+
+ 		function backSection() {
+ 			console.log("previous section")
+ 			sectionIndex--;
+ 			sentenceIndex=0;
+ 			if(sectionIndex < 0) {
+ 				backPage();
+ 			}
+ 		}
+
+ 		function forwardPage() {
+ 			console.log("next page")
+ 			pageIndex++;
+ 			sectionIndex=0;
+ 			sentenceIndex=0;
+ 			if(pageIndex >= contents.length) {
+ 				pageIndex = 0;
+ 			}
+ 		}
+
+ 		function backPage() {
+ 			console.log("previous page")
+ 			pageIndex--;
+ 			sectionIndex=0;
+ 			sentenceIndex=0;
+ 			if(pageIndex < 0) {
+ 				pageIndex = contents.length - 1;
+ 			}
+ 		}
+
+ 		function read() {
+ 			//document.getElementById('sentence1').style.color = "blue";
+ 			console.log(pageIndex, sectionIndex, sentenceIndex);
+ 			var text = contents[pageIndex][sectionIndex][sentenceIndex];
+ 			var speed = 1.0;
+ 			if (speech != null) {
+ 				speed = speech.rate;
+ 			}
+ 			speech = new SpeechSynthesisUtterance(text);
+ 			speech.rate = speed;
+ 			speech.onend = function() {
+ 				forwardSentence();
+				read();
+ 			};
+ 			speech.onboundary = function(event) {
+ 				console.log(text.substring(event.charIndex, text.indexOf(' ', event.charIndex)));
+ 			}
+			window.speechSynthesis.speak(speech);
+			window.speechSynthesis.resume();
+			//document.getElementById('sentence1').style.color = "black";
+
+			/*for(var i = 0; i < 10; i++) {
+				speech = new SpeechSynthesisUtterance(text);
+				window.speechSynthesis.speak(speech);
+				window.speechSynthesis.resume();
+				forwardSentence();
+				text=contents[pageIndex][sectionIndex][sentenceIndex]
+				document.getElementById('sentence'+sentenceIndex).style.color = "blue";
+			}*/		
+		}
+
+		function cancel(){
+			speech.onend = null;
+			window.speechSynthesis.cancel();
+		}
+
+ 		contents = [
+ 		  [
+ 		    [
+ 		      'The Activity and Art of Reading. ',
+ 		      'This is a book for readers and for those who wish to become readers. ',
+ 		      'Particularly, it is for readers of books. ',
+ 		      'Even more particularly, it is for those whose main purpose in reading books is to gain increased understanding. ',
+ 		      'By readers we mean people who are still accustomed, as almost every literate and intelligent person used to be, to gain a large share of their information about and their understanding of the world from the written word. '
+ 		    ],
+ 		    [
+ 		      'Not all of it, of course; even in the days before radio and television, a certain amount of information and understanding was acquired through spoken words and through observation. ',
+ 		      'But for intelligent and curious people that was never enough. ',
+ 		      'They knew that they had to read too, and they did read. '
+ 		    ]
+ 		  ],
+ 		  [
+ 		    [
+ 		      'There is some feeling nowadays that reading is not as necessary as it once was. ',
+ 		      'Radio and especially television have taken over many of the functions once served by print, just as photography has taken over functions once served by painting and other graphic arts. ',
+ 		      'Admittedly, television serves some of these functions extremely well; the visual communication of news events, for example, has enormous impact. ',
+ 		      'The ability of radio to give us information while we are engaged in doing other things for instance, driving a car is remarkable, and a great saving of time. ',
+ 		      'But it may be seriously questioned whether the advent of modern communications media has much enhanced our understanding of the world in which we live. ' 
+ 		    ]
+ 		  ]
+ 		]
+
+ 		articleEle = $('.article')
+
+ 		// each page
+ 		for(var i = 0; i < contents.length; i++) {
+ 			pageEle = $("<div class='page' id='page" + i + "'/>")
+ 			articleEle.append(pageEle);
+ 			// each section
+ 			for(var j = 0; j < contents[i].length; j++) {
+ 				sectionEle = $("<div class='section' id='section" + j + "'/>")
+ 				pageEle.append(sectionEle);
+ 				// each sentence
+ 				for (var k = 0; k < contents[i][j].length; k++) {
+ 					sentenceEle = $("<span class='sentence' id='sentence" + k + "'>" + contents[i][j][k] + "</span>")
+ 					sectionEle.append(sentenceEle);
+ 					console.log(i+1,j+1,k+1/*,sentenceTotal*/);
+ 					//sentenceTotal++;
+ 				}
+ 			}
+ 		}
+
+ 		//read();
+		
+		/*
+		function read(text){
+			msg = new SpeechSynthesisUtterance(text);
+			msg.rate = speed;
+			window.speechSynthesis.speak(msg);
+			window.speechSynthesis.resume();
+			msg.onboundary = function(event) {
+			    var length = text.length;
+			    var index = event.charIndex;
+			    var chr = text.charAt(index);
+			    // subtract index2 first because then the current indexvalue would be added twice.  
+			   	index3 = index3 - index2 + index;
+			   	index2 = index;
+			    if (index3 > period[periodIndex]) {
+			    	periodIndex = periodIndex + 1;
+			    } 
+				res = text.slice(index, length);
+			};
+		}
+
+		function readMyEmailSTOP(targetEmail){
+			window.speechSynthesis.cancel();
+			location.reload();
+		}*/
+		
+		
+		//SPEED
+		// changeSpeed()
+		// 		- changes the rate of TTS on the spot, using information from the slider
+		// 		Uses variables
+		// 			- index2, index3
+		// 		Parameter
+		// 			-  "NewWavlue" is the numeric value taken the slider
+		// 		Logic
+		//			- changeSpeed is called when the slider is used, changeSpeed then takes the 
+		// 			number that the slider was changed to, stops the text from reading, changes 
+		// 			the speed, and starts reading the text again
+		// 		Returns 
+		// 			- the text with a new reading rate
+
+
+
+	</script>
+
+</body>
+</html>
