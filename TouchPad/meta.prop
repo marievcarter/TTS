@@ -1,0 +1,5 @@
+meta.id: TouchPad1
+meta.name: Touch Input
+meta.author: Marie
+meta.description: Touchpad mouse controller for TTS.
+meta.tags.category: example
