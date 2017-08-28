@@ -13,12 +13,14 @@ Text to Speech Interactions - using Mozilla SpeechSynthesis API
 
 ### Phone Remote Touch Commands
 - Tap: Play/Pause
+- Swipe right: move forward
+- Swipe left: move backwards
 
 ### Secondary Keyboard Shortcuts
-- Play:
-- Pause:
-- Next Sentence:
-- Previous Sentence:
-- Adjust Speed:
+- Play: p
+- Pause: c
+- Next Sentence: d
+- Previous Sentence: a
+- Adjust Speed: 1,2,3,4,5
 
 ## Dials Version
