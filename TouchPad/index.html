@@ -17,23 +17,14 @@
 			border-bottom: 2px solid #000000;
 			border-top: 2px solid #000000;
 		}
-		.page {
-			padding: 20px 20px 20px 20px;
-			/*border-bottom: 2px solid #000000;
-			border-top: 2px solid #000000;
-			background-color: #bcc4c0;*/
-		}
 		.section {
 			padding: 20px 20px 20px 20px;
-			/*border-bottom: 0.5px solid #000000;
-			border-top: 0.5px solid #000000;
-			background-color: #daf2e5;*/
 		}
-		.article {
+		.page {
 			background: #fff;
   			box-shadow: 0 0 2px rgba(0, 0, 0, .34);
-  			height: 800px;
-  			margin: auto;
+  			height: 400px;
+  			margin: 20px 20px 20px 20px;
   			position: relative;
   			width: 700px;
   			text-align: center;
@@ -187,6 +178,8 @@
 
  		function read() {
  			console.log(pageIndex, sectionIndex, sentenceIndex);
+ 			$('.sentence').css('color','black')
+ 			$('#page'+pageIndex + '> #section' + sectionIndex + '> #sentence'+sentenceIndex).css('color','blue')
  			var text = contents[pageIndex][sectionIndex][sentenceIndex];
  			var speed = 1.0;
  			if (speech != null) {
@@ -250,8 +243,8 @@
  				for (var k = 0; k < contents[i][j].length; k++) {
  					sentenceEle = $("<span class='sentence' id='sentence" + k + "'>" + contents[i][j][k] + "</span>")
  					sectionEle.append(sentenceEle);
- 					console.log(i+1,j+1,k+1/*,sentenceTotal*/);
- 					//sentenceTotal++;
+ 					console.log(i+1,j+1,k+1,sentenceTotal);
+ 					sentenceTotal++;
  				}
  			}
  		}
