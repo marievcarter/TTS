@@ -21,6 +21,8 @@ Text to Speech Interactions - using Mozilla SpeechSynthesis API
 - Pause: c
 - Next Sentence: d
 - Previous Sentence: a
+- Next Section: w
+- Next Page: q
 - Adjust Speed: 1,2,3,4,5
 
 ## Dials Version
